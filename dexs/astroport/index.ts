@@ -30,9 +30,10 @@ export const fetch = (chainId: string) => {
       chainId,
       type: "volume",
     });
+    const data = response?.historicalData;
     return {
       timestamp: dayTimestamp,
-      dailyVolume: response?.historicalData ? response.historicalData : undefined,
+      dailyVolume: data?.totalVolume || undefined,
     };
   };
 };
