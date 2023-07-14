@@ -20,8 +20,9 @@ const fetch = (chainId: string) => {
     return {
       timestamp,
       dailyFees: data?.totalCommissionUSD || undefined,
+      dailyUserFees: data?.totalCommissionUSD || undefined,
       dailySupplySideRevenue: data?.totalLpFeesUsd || undefined,
-      dailyProtocolRevenue: data?.totalMakerFeeUSD || undefined,
+      dailyHoldersRevenue: data?.totalMakerFeeUSD || undefined,
     };
   };
 };
