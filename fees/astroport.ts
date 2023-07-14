@@ -1,10 +1,8 @@
 import { CHAIN } from "../helpers/chains";
 
 import { BaseAdapter, Adapter, FetchResult } from "../adapters/types";
-import BigNumber from "bignumber.js";
 import { historicalDataQuery, API_ENDPOINT } from "../dexs/astroport";
 import { request } from "graphql-request";
-import { getUniqStartOfTodayTimestamp } from "../helpers/getUniSubgraphVolume";
 
 const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
@@ -27,20 +25,6 @@ const fetch = (chainId: string) => {
     };
   };
 };
-
-// const methodology = {
-//   UserFees:
-//     "Users pay a fee per trade: 0.3% for constant product pools, 0.05% for stableswap pools.",
-//   Fees: "Total fees collected from all trades on Astroport pools.",
-//   Revenue:
-//     "Astral Assembly's share: 1/3rd of the total fee for constant product pools (0.1%), 1/2 of the total fee for stableswap pools (0.025%).",
-//   ProtocolRevenue:
-//     "The Astral Assembly's revenue used to purchase ASTRO: 0.1% for constant product pools, 0.025% for stableswap pools.",
-//   HoldersRevenue:
-//     "Revenue from ASTRO purchases using Astral Assembly's fees, deposited into the xASTRO staking pool.",
-//   SupplySideRevenue:
-//     "LPs' share of fees: 2/3rds of the total for constant product pools (0.2%), 1/2 for stableswap pools (0.025%), increasing the size of the pools and the number of tokens LPs can redeem.",
-// };
 
 const methodology = {
   UserFees:
