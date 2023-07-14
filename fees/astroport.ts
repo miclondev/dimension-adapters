@@ -19,9 +19,9 @@ const fetch = (chainId: string) => {
     const data = response?.historicalData;
     return {
       timestamp,
-      dailyFees: data?.totalCommissionUSD ? String(data?.totalCommissionUSD) : undefined,
-      dailySupplySideRevenue: data?.totalMakerFeeUSD ? String(data?.totalMakerFeeUSD) : undefined,
-      dailyProtocolRevenue: data?.totalMakerFeeUSD ? String(data?.totalMakerFeeUSD) : undefined,
+      dailyFees: data?.totalCommissionUSD || undefined,
+      dailySupplySideRevenue: data?.totalMakerFeeUSD || undefined,
+      dailyProtocolRevenue: data?.totalMakerFeeUSD || undefined,
     };
   };
 };
