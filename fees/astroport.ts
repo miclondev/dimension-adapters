@@ -1,6 +1,5 @@
 import { CHAIN } from "../helpers/chains";
-
-import { BaseAdapter, Adapter, FetchResult } from "../adapters/types";
+import { BaseAdapter, Adapter } from "../adapters/types";
 import { historicalDataQuery, API_ENDPOINT } from "../dexs/astroport";
 import { request } from "graphql-request";
 
@@ -20,6 +19,7 @@ const fetch = (chainId: string) => {
     return {
       timestamp,
       dailyFees: data?.totalCommissionUSD || undefined,
+      dailyRevenue: data?.totalCommissionUSD || undefined,
       dailyUserFees: data?.totalCommissionUSD || undefined,
       dailySupplySideRevenue: data?.totalLpFeesUsd || undefined,
       dailyHoldersRevenue: data?.totalMakerFeeUSD || undefined,
@@ -29,15 +29,12 @@ const fetch = (chainId: string) => {
 
 const methodology = {
   UserFees:
-    "Users pay a fee per trade: 0.3% for constant product pools, 0.05% for stableswap pools.",
-  Revenue:
-    "A 0.05% (bsc and ethereum) or 0.15% (polygon and telos) of the fees goes to treasury, 50% of that fee is used to buyback and burn BANANA, on Telos 25% of the collected fees goes to Telos",
-  ProtocolRevenue:
-    "A 0.05% (bsc and ethereum) or 0.15% (polygon) or 0.0375% (telos) of the fees goes to treasury",
+    "Traders incur a fee per transaction on Astroport: 0.3% for constant product pools and 0.05% for stableswap pools.",
+  Fees: "Astroport enforces a fee structure per transaction where 2/3rd of the total fee is awarded to liquidity providers, and the remaining 1/3rd goes to the Astral Assembly for governing purposes.",
   HoldersRevenue:
-    "Of all DEX trading fees earned by ApeSwap, 50% are used to buy back and burn BANANA on a quarterly basis",
+    "Astroport directs a third of all its DEX trading fees to the Astral Assembly, which are then used to purchase ASTRO from ASTRO liquidity pools. These purchased ASTRO are added to the xASTRO staking pool.",
   SupplySideRevenue:
-    "A 0.15% (bsc and ethereum) or 0.05% (polygon and telos) is distributed proportionally to all APE-LP token holders",
+    "Two-thirds of all DEX trading fees generated on Astroport are allocated to the liquidity providers.",
 };
 
 const baseAdapter: BaseAdapter = {
