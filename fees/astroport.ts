@@ -46,14 +46,14 @@ const baseAdapter: BaseAdapter = {
     },
   },
   [CHAIN.INJECTIVE]: {
-    fetch: fetch("phoenix-1"),
+    fetch: fetch("injective-1"),
     start: async () => 1654337809,
     meta: {
       methodology,
     },
   },
   neutron: {
-    fetch: fetch("phoenix-1"),
+    fetch: fetch("neutron-1"),
     start: async () => 1654337809,
     meta: {
       methodology,

@@ -3,8 +3,7 @@ import { CHAIN } from "../../helpers/chains";
 import { getUniqStartOfTodayTimestamp } from "../../helpers/getUniSubgraphVolume";
 import { request } from "graphql-request";
 
-// const API_ENDPOINT = "https://develop-multichain-api.astroport.fi/graphql";
-export const API_ENDPOINT = "http://localhost:4000/local/graphql";
+export const API_ENDPOINT = "https://multichain-api.astroport.fi/graphql";
 
 export const historicalDataQuery = `
   query Query($chainId: String!, $startTime: Int, $endTime: Int, $type: String) {
