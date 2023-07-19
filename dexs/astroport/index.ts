@@ -8,9 +8,6 @@ export const API_ENDPOINT = "https://multichain-api.astroport.fi/graphql";
 export const historicalDataQuery = `
   query Query($chainId: String!, $startTime: Int, $endTime: Int, $type: String) {
     historicalData(chainId: $chainId, startTime: $startTime, endTime: $endTime, type: $type){
-      totalCommissionUSD
-      totalLpFeesUsd
-      totalMakerFeeUSD
       totalVolume
     }
   }

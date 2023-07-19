@@ -1,9 +1,19 @@
 import { CHAIN } from "../helpers/chains";
 import { BaseAdapter, Adapter } from "../adapters/types";
-import { historicalDataQuery, API_ENDPOINT } from "../dexs/astroport";
+import { API_ENDPOINT } from "../dexs/astroport";
 import { request } from "graphql-request";
 
 const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+
+export const historicalDataQuery = `
+  query Query($chainId: String!, $startTime: Int, $endTime: Int, $type: String) {
+    historicalData(chainId: $chainId, startTime: $startTime, endTime: $endTime, type: $type){
+      totalCommissionUSD
+      totalLpFeesUSD
+      totalMakerFeeUSD
+    }
+  }
+`;
 
 const fetch = (chainId: string) => {
   return async (timestamp: number) => {
@@ -21,7 +31,7 @@ const fetch = (chainId: string) => {
       dailyFees: data?.totalCommissionUSD || undefined,
       dailyRevenue: data?.totalCommissionUSD || undefined,
       dailyUserFees: data?.totalCommissionUSD || undefined,
-      dailySupplySideRevenue: data?.totalLpFeesUsd || undefined,
+      dailySupplySideRevenue: data?.totalLpFeesUSD || undefined,
       dailyHoldersRevenue: data?.totalMakerFeeUSD || undefined,
     };
   };
